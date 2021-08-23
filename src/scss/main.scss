@@ -1,4 +1,13 @@
-h1 {
-  display: flex;
-  color: red;
-}
+$color--black: #0E111B;
+$color--black-90: rgba(#0E111B, .9);
+$color--black-50: rgba(#0E111B, .5);
+
+$color--white: #fff;
+$color--white-60: rgba(#fff, .6);
+$color--white-50: rgba(#fff, .5);
+$color--white-30: rgba(#fff, .3);
+$color--white-10: rgba(#fff, .1);
+$color--white-5: rgba(#fff, .05);
+
+$color--primary: #FDC000;
+$color--area: #1C212E;
