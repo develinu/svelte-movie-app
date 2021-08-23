@@ -1,1 +1,9 @@
-<h1>Hello Svelte!</h1>
+<script>
+  import Header from '~/components/Header.svelte'
+</script>
+
+<Header />
+
+<style lang="scss">
+
+</style>
