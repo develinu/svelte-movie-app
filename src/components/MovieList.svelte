@@ -1,9 +1,13 @@
 <script>
-  import { movies } from '~/store/movie'
-  import MovieCard from '~/components/MovieCard.svelte'
+  import { movies, loading } from '~/store/movie'
+  import MovieCard from '~/components/MovieCard.svelte'  
+  import Loader from '~/components/Loader.svelte'
 </script>
 
 <div class="movie-list">
+  {#if $loading}
+    <Loader />
+  {/if}
   <div class="movies">
     {#each $movies as movie (movie.imdbID)}
       <MovieCard {movie} />
@@ -18,7 +22,7 @@
     background-color: $color--area;
     border-radius: 4px;
     text-align: center;
-    
+
     .movies {
       display: flex;
       flex-wrap: wrap;
