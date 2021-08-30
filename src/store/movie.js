@@ -4,6 +4,7 @@ import _unionBy from 'lodash/unionBy'
 
 export const movies = writable([])
 export const loading = writable(false)
+export const theMovie = writable({})
 
 export async function searchMovies(payload) {
   if (get(loading)) {
@@ -14,7 +15,8 @@ export async function searchMovies(payload) {
   const { title, type, year, number } = payload
   const OMDB_API_KEY = "e81c8728"
 
-  const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}${year ? `&y=${year}`: ""}`)
+  // const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}${year ? `&y=${year}`: ""}`)
+  const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}`)
 
   const { Search, totalResults } = res.data
   movies.set(Search)
@@ -32,5 +34,20 @@ export async function searchMovies(payload) {
     }
   }
   
+  loading.set(false)
+}
+
+export async function searchMovieWithId(id) {
+  if (get(loading)) {
+    return
+  }
+
+  loading.set(true)
+  const OMDB_API_KEY = "e81c8728"
+
+  const res = await axios.get(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}&plot=full`)
+  console.log(res)
+
+  theMovie.set(res.data)
   loading.set(false)
 }
