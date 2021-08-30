@@ -5,6 +5,7 @@ import _unionBy from 'lodash/unionBy'
 export const movies = writable([])
 export const loading = writable(false)
 export const theMovie = writable({})
+export const message = writable("Search for the movie title!")
 
 export async function searchMovies(payload) {
   if (get(loading)) {
