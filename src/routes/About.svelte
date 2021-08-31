@@ -5,8 +5,9 @@
   $: query = qs.parse($querystring)
   $: name = query.name || "Inu"
   $: email = query.email || "iwlee.dev@gmail.com"
-  $: blog = query.blog || "https://"
+  $: blog = query.blog || "https://devinu.notion.site/8f5cdaadde1547ca82a4c13d97a76d47"
   $: phone = query.phone || "+82-10-4226-3519"
+  $: image = query.image || "/assets/inu-emoji.png"
 </script>
 
 <div class="user-profile">
@@ -15,7 +16,7 @@
       <img src="/assets/svelte.png" alt="User">
     </div>
     <div class="photo">
-      <img src="/assets/inu-emoji.png" alt="User">
+      <img src={image} alt="User">
     </div>    
   </div>  
   <div class="details">
