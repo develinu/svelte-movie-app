@@ -23,10 +23,11 @@ export async function searchMovies(payload) {
   let total = 0
 
   try {
-    const res = await _fetchMovie({
+    const res = await axios.post("/.netlify/functions/movie", {
       ...payload,
       page: 1
     })
+    console.log("res:", res)
     const { Search, totalResults } = res.data
     movies.set(Search)
     total = totalResults
@@ -44,7 +45,7 @@ export async function searchMovies(payload) {
       if (page > (payload.number / 10)) {
         break
       }
-      const res = await _fetchMovie({
+      const res = await axios.post("/.netlify/functions/movie", {
         ...payload,
         page
       })
@@ -62,33 +63,11 @@ export async function searchMovieWithId(id) {
   }
 
   loading.set(true)
-
-  const res = await _fetchMovie({
+  const res = await axios.post("/.netlify/functions/movie", {
     id
   })
   console.log(res)
 
   theMovie.set(res.data)
   loading.set(false)
-}
-
-function _fetchMovie(payload) {
-  const { title, type, year, page, id } = payload
-  const OMDB_API_KEY = "e81c8728"
-
-  const url = id 
-    ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}&plot=full`
-    : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const res = await axios.get(url)
-      if (res.data.Error) {
-        reject(res.data.Error)
-      }
-      resolve(res)
-    } catch (error) {
-      reject(error.message)
-    }
-  })
 }
