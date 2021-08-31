@@ -73,11 +73,23 @@
   .search {
     display: grid;
     grid-template-columns: 1fr repeat(4, 120px);
-    grid-column-gap: 10px;
+    grid-column-gap: 10px;    
+    @media #{$tablet} {
+      grid-template-columns: repeat(3, 120px) 1fr;
+      grid-template-rows: repeat(2, 50px);
+      grid-row-gap: 10px;
+    }
+    @media #{$mobile} {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 50px);
+    }
 
     .text-field {
       display: inline-block;
       height: 50px;
+      @media #{$tablet} {
+        grid-column: 1 / -1;
+      }
       input {
         width: 100%;
         height :100%;
@@ -139,7 +151,9 @@
       font-weight: 700;
       color: $color--black;
       background-color: $color--primary;
-      
+      @media #{$mobile} {
+        grid-column: 1 / -1;
+      }      
       &:hover {
         background-color: darken($color--primary, 10%);
         transition: .4s;
